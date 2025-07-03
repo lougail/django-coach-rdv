@@ -1,0 +1,11 @@
+# Nouvelle fonctionnalité
+git checkout -b feature/homepage
+# ... développement ...
+git add .
+git commit -m "Add: Homepage with base template"
+git push origin feature/homepage
+
+# Merger dans main
+git checkout main
+git merge feature/homepage
+git push origin main
