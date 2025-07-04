@@ -1,0 +1,147 @@
+{% extends 'rdv/base.html' %}
+
+{% block title %}Dashboard Coach - Coach RDV{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-4 py-8">
+    <!-- En-tête du dashboard -->
+    <div class="bg-gradient-to-r from-green-600 to-green-800 rounded-lg shadow-lg p-8 mb-8 text-white">
+        <div class="flex items-center justify-between">
+            <div>
+                <h1 class="text-3xl font-bold mb-2">
+                    Bienvenue, Coach {{ user.first_name|default:user.username }} !
+                </h1>
+                <p class="text-green-100 text-lg">Tableau de bord Coach</p>
+            </div>
+            <div class="text-right">
+                <p class="text-green-100">Connecté en tant que</p>
+                <p class="text-xl font-semibold">{{ profil.get_role_display }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Section principale -->
+        <div class="lg:col-span-2 space-y-6">
+            <!-- Planning du jour -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                    <svg class="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                    Planning d'aujourd'hui
+                </h2>
+                <div class="text-gray-600">
+                    <p class="mb-4">Aucun rendez-vous programmé pour aujourd'hui.</p>
+                    <a href="#" class="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                        Gérer mes disponibilités
+                    </a>
+                </div>
+            </div>
+
+            <!-- Demandes de rendez-vous -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                    <svg class="w-5 h-5 mr-2 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                    </svg>
+                    Demandes en attente
+                </h2>
+                <div class="text-gray-600">
+                    <p>Aucune nouvelle demande de rendez-vous.</p>
+                </div>
+            </div>
+
+            <!-- Clients récents -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                    <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                    Mes clients
+                </h2>
+                <div class="text-gray-600">
+                    <p>Aucun client n'a encore pris rendez-vous avec vous.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="space-y-6">
+            <!-- Actions rapides -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Actions rapides</h3>
+                <div class="space-y-3">
+                    <a href="#" class="block w-full text-left px-4 py-3 bg-green-50 text-green-700 rounded-md hover:bg-green-100 transition-colors">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            Gérer mes créneaux
+                        </div>
+                    </a>
+                    <a href="#" class="block w-full text-left px-4 py-3 bg-gray-50 text-gray-700 rounded-md hover:bg-gray-100 transition-colors">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                            </svg>
+                            Mon profil coach
+                        </div>
+                    </a>
+                    <a href="#" class="block w-full text-left px-4 py-3 bg-gray-50 text-gray-700 rounded-md hover:bg-gray-100 transition-colors">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 00-2-2z"></path>
+                            </svg>
+                            Statistiques
+                        </div>
+                    </a>
+                    <a href="#" class="block w-full text-left px-4 py-3 bg-gray-50 text-gray-700 rounded-md hover:bg-gray-100 transition-colors">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                            </svg>
+                            Mes revenus
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Statistiques coach -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Mes statistiques</h3>
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-600">Séances données</span>
+                        <span class="font-semibold text-gray-900">0</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-600">Clients actifs</span>
+                        <span class="font-semibold text-gray-900">0</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-600">Rendez-vous à venir</span>
+                        <span class="font-semibold text-gray-900">0</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-600">Coach depuis</span>
+                        <span class="font-semibold text-gray-900">{{ profil.created_at|date:"M Y" }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prochaines séances -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Prochaines séances</h3>
+                <div class="text-gray-600 text-sm">
+                    <p>Aucune séance programmée dans les prochains jours.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
