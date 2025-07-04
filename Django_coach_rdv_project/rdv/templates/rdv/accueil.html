@@ -46,8 +46,8 @@
     </div>
     
     <div class="flex justify-center space-x-4">
-        <a href="#" class="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition duration-300">Connexion</a>
-        <a href="#" class="bg-green-600 text-white px-6 py-3 rounded-md hover:bg-green-700 transition duration-300">Inscription</a>
+        <a href="{% url 'accounts:login' %}" class="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition duration-300">Connexion</a>
+        <a href="{% url 'accounts:register' %}" class="bg-green-600 text-white px-6 py-3 rounded-md hover:bg-green-700 transition duration-300">Inscription</a>
     </div>
 </div>
 {% endblock %}
