@@ -1,14 +1,5 @@
 {% extends 'rdv/base.html' %}
 
-{% if user.is_authenticated %}
-    <p>Connecté sous {{ user.username }} | <a href="{% url 'accounts:logout' %}">Déconnexion</a></p>
-{% else %}
-    <p>
-        <a href="{% url 'accounts:login' %}">Connexion</a>
-        <a href="{% url 'accounts:register' %}">Inscription</a>
-    </p>
-{% endif %}
-
 {% block title %}Accueil - Coach RDV{% endblock %}
 
 {% block content %}
