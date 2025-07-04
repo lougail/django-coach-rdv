@@ -1,6 +1,39 @@
-*.pyc
+# Python
 __pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Django
+*.log
+local_settings.py
 db.sqlite3
-.env
+db.sqlite3-journal
+media/
+
+# Static files
 /static/
-/media/
+staticfiles/
+
+# Node.js (pour Tailwind)
+node_modules/
+npm-debug.log*
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+
+# Dossier de notes
+notes/

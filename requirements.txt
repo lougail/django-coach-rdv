@@ -1,0 +1,57 @@
+# =============================================================================
+# REQUIREMENTS POUR LE PROJET DJANGO COACH RDV
+# =============================================================================
+
+# Framework principal
+Django>=5.2.4,<6.0
+
+# Intégration Tailwind CSS pour Django
+django-tailwind>=3.8.0
+
+# Base de données (SQLite est inclus avec Python)
+# Pour PostgreSQL en production, décommentez :
+# psycopg2-binary>=2.9.0
+
+# Utilitaires de développement
+django-extensions>=3.2.0
+
+# Gestion des fichiers statiques en production
+whitenoise>=6.0.0
+
+# Variables d'environnement
+python-decouple>=3.8
+
+# Pillow pour la gestion des images (si vous ajoutez des uploads d'images)
+Pillow>=10.0.0
+
+# =============================================================================
+# DEPENDENCIES OPTIONNELLES POUR LE FUTUR
+# =============================================================================
+
+# Pour les formulaires avancés
+# django-crispy-forms>=2.0.0
+# crispy-tailwind>=0.5.0
+
+# Pour l'authentification avancée
+# django-allauth>=0.57.0
+
+# Pour les tests
+# pytest-django>=4.5.0
+# coverage>=7.0.0
+
+# Pour l'API REST (si besoin futur)
+# djangorestframework>=3.14.0
+
+# =============================================================================
+# NOTES D'INSTALLATION
+# =============================================================================
+# 
+# 1. Activez votre environnement virtuel (depuis la racine) :
+#    source env/Scripts/activate  (Windows/Git Bash)
+#
+# 2. Installez les dépendances (depuis la racine) :
+#    pip install -r requirements.txt
+#
+# 3. Lancez Django (depuis le sous-dossier) :
+#    cd Django_coach_rdv_project
+#    python manage.py runserver

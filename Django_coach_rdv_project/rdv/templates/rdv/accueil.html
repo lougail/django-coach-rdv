@@ -1,0 +1,62 @@
+{% extends 'rdv/base.html' %}
+
+{% if user.is_authenticated %}
+    <p>Connecté sous {{ user.username }} | <a href="{% url 'accounts:logout' %}">Déconnexion</a></p>
+{% else %}
+    <p>
+        <a href="{% url 'accounts:login' %}">Connexion</a>
+        <a href="{% url 'accounts:register' %}">Inscription</a>
+    </p>
+{% endif %}
+
+{% block title %}Accueil - Coach RDV{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <h1 class="text-4xl font-bold text-gray-800 mb-8">Bienvenue chez Marie Dupont</h1>
+    <p class="text-xl text-gray-600 mb-8">Coach en développement personnel certifiée</p>
+    
+    <!-- Présentation du coach -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">À propos</h2>
+        <p class="text-gray-600 mb-4">
+            Forte de 10 ans d'expérience, je vous accompagne dans votre développement personnel 
+            et professionnel. Spécialisée en gestion du stress, confiance en soi et leadership.
+        </p>
+    </div>
+    
+    <!-- Services -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">Mes Services</h2>
+        <div class="grid md:grid-cols-3 gap-4">
+            <div class="text-center">
+                <h3 class="font-bold text-lg mb-2">Coaching Individuel</h3>
+                <p class="text-gray-600">Séances personnalisées - 60€/h</p>
+            </div>
+            <div class="text-center">
+                <h3 class="font-bold text-lg mb-2">Gestion du Stress</h3>
+                <p class="text-gray-600">Techniques de relaxation - 50€/h</p>
+            </div>
+            <div class="text-center">
+                <h3 class="font-bold text-lg mb-2">Leadership</h3>
+                <p class="text-gray-600">Développement managérial - 70€/h</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Horaires -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">Horaires</h2>
+        <p class="text-gray-600">
+            Lundi à Vendredi : 9h00 - 18h00<br>
+            Samedi : 9h00 - 12h00<br>
+            Dimanche : Fermé
+        </p>
+    </div>
+    
+    <div class="flex justify-center space-x-4">
+        <a href="#" class="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition duration-300">Connexion</a>
+        <a href="#" class="bg-green-600 text-white px-6 py-3 rounded-md hover:bg-green-700 transition duration-300">Inscription</a>
+    </div>
+</div>
+{% endblock %}
