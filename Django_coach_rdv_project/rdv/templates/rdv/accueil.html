@@ -3,51 +3,130 @@
 {% block title %}Accueil - Coach RDV{% endblock %}
 
 {% block content %}
-<div class="text-center">
-    <h1 class="text-4xl font-bold text-gray-800 mb-8">Bienvenue chez Marie Dupont</h1>
-    <p class="text-xl text-gray-600 mb-8">Coach en développement personnel certifiée</p>
-    
-    <!-- Présentation du coach -->
-    <div class="bg-white rounded-lg shadow-md p-6 mb-8">
-        <h2 class="text-2xl font-bold text-gray-800 mb-4">À propos</h2>
-        <p class="text-gray-600 mb-4">
-            Forte de 10 ans d'expérience, je vous accompagne dans votre développement personnel 
-            et professionnel. Spécialisée en gestion du stress, confiance en soi et leadership.
-        </p>
-    </div>
-    
-    <!-- Services -->
-    <div class="bg-white rounded-lg shadow-md p-6 mb-8">
-        <h2 class="text-2xl font-bold text-gray-800 mb-4">Mes Services</h2>
-        <div class="grid md:grid-cols-3 gap-4">
-            <div class="text-center">
-                <h3 class="font-bold text-lg mb-2">Coaching Individuel</h3>
-                <p class="text-gray-600">Séances personnalisées - 60€/h</p>
-            </div>
-            <div class="text-center">
-                <h3 class="font-bold text-lg mb-2">Gestion du Stress</h3>
-                <p class="text-gray-600">Techniques de relaxation - 50€/h</p>
-            </div>
-            <div class="text-center">
-                <h3 class="font-bold text-lg mb-2">Leadership</h3>
-                <p class="text-gray-600">Développement managérial - 70€/h</p>
+<div class="min-h-screen bg-gradient-to-br from-blue-100 via-pink-50 to-green-100 py-12">
+    <div class="max-w-5xl mx-auto text-center">
+        <!-- Avatar coach -->
+        <div class="flex justify-center mb-6">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Coach Marie Dupont" class="w-32 h-32 rounded-full shadow-xl border-4 border-white object-cover bg-white">
+        </div>
+        <h1 class="text-4xl md:text-5xl font-extrabold text-gray-800 mb-2 tracking-tight">Bienvenue chez <span class="text-blue-500">Marie Dupont</span></h1>
+        <p class="text-xl text-gray-500 mb-8">Coach en développement personnel certifiée</p>
+
+        <!-- Présentation du coach -->
+        <div class="bg-white/80 rounded-3xl shadow-lg p-8 mb-10 backdrop-blur-sm">
+            <h2 class="text-2xl font-bold text-blue-600 mb-4 flex items-center justify-center">
+                <svg class="w-7 h-7 mr-2 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" stroke-width="2"/></svg>
+                À propos
+            </h2>
+            <p class="text-gray-600 mb-2 leading-relaxed">
+                Forte de 10 ans d'expérience, je vous accompagne dans votre développement personnel et professionnel.<br>
+                Spécialisée en gestion du stress, confiance en soi et leadership.
+            </p>
+        </div>
+
+        <!-- Services -->
+        <div class="bg-white/80 rounded-3xl shadow-lg p-8 mb-10 backdrop-blur-sm">
+            <h2 class="text-2xl font-bold text-green-600 mb-6 flex items-center justify-center">
+                <svg class="w-7 h-7 mr-2 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-6a2 2 0 012-2h2a2 2 0 012 2v6m-6 0a2 2 0 002 2h2a2 2 0 002-2"/></svg>
+                Mes Services
+            </h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-blue-50 rounded-2xl p-6 shadow hover:scale-105 transition">
+                    <div class="flex justify-center mb-2">
+                        <svg class="w-10 h-10 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <h3 class="font-bold text-lg mb-1 text-blue-700">Coaching Individuel</h3>
+                    <span class="inline-block bg-blue-100 text-blue-700 px-2 py-1 rounded-full text-xs mb-2">60€/h</span>
+                    <p class="text-gray-600 text-sm">Séances personnalisées pour vos objectifs.</p>
+                </div>
+                <div class="bg-green-50 rounded-2xl p-6 shadow hover:scale-105 transition">
+                    <div class="flex justify-center mb-2">
+                        <svg class="w-10 h-10 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" stroke-width="2"/></svg>
+                    </div>
+                    <h3 class="font-bold text-lg mb-1 text-green-700">Gestion du Stress</h3>
+                    <span class="inline-block bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs mb-2">50€/h</span>
+                    <p class="text-gray-600 text-sm">Techniques de relaxation et gestion émotionnelle.</p>
+                </div>
+                <div class="bg-yellow-50 rounded-2xl p-6 shadow hover:scale-105 transition">
+                    <div class="flex justify-center mb-2">
+                        <svg class="w-10 h-10 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="6" width="12" height="12" rx="2" stroke-width="2"/></svg>
+                    </div>
+                    <h3 class="font-bold text-lg mb-1 text-yellow-700">Leadership</h3>
+                    <span class="inline-block bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full text-xs mb-2">70€/h</span>
+                    <p class="text-gray-600 text-sm">Développement managérial et confiance en soi.</p>
+                </div>
             </div>
         </div>
-    </div>
-    
-    <!-- Horaires -->
-    <div class="bg-white rounded-lg shadow-md p-6 mb-8">
-        <h2 class="text-2xl font-bold text-gray-800 mb-4">Horaires</h2>
-        <p class="text-gray-600">
-            Lundi à Vendredi : 9h00 - 18h00<br>
-            Samedi : 9h00 - 12h00<br>
-            Dimanche : Fermé
-        </p>
-    </div>
-    
-    <div class="flex justify-center space-x-4">
-        <a href="{% url 'accounts:login' %}" class="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition duration-300">Connexion</a>
-        <a href="{% url 'accounts:register' %}" class="bg-green-600 text-white px-6 py-3 rounded-md hover:bg-green-700 transition duration-300">Inscription</a>
+
+        <!-- Pourquoi me choisir -->
+        <div class="bg-white/80 rounded-3xl shadow-lg p-8 mb-10 backdrop-blur-sm">
+            <h2 class="text-2xl font-bold text-pink-500 mb-6 flex items-center justify-center">
+                <svg class="w-7 h-7 mr-2 text-pink-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/></svg>
+                Pourquoi me choisir ?
+            </h2>
+            <div class="flex flex-wrap justify-center gap-8">
+                <div class="flex flex-col items-center">
+                    <div class="bg-blue-100 p-4 rounded-full mb-2"><svg class="w-7 h-7 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></div>
+                    <span class="font-semibold text-blue-700">Écoute active</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="bg-green-100 p-4 rounded-full mb-2"><svg class="w-7 h-7 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></div>
+                    <span class="font-semibold text-green-700">Bienveillance</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="bg-yellow-100 p-4 rounded-full mb-2"><svg class="w-7 h-7 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" stroke-width="2"/></svg></div>
+                    <span class="font-semibold text-yellow-700">Expertise</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="bg-pink-100 p-4 rounded-full mb-2"><svg class="w-7 h-7 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="6" width="12" height="12" rx="2" stroke-width="2"/></svg></div>
+                    <span class="font-semibold text-pink-700">Suivi personnalisé</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to action principal -->
+        <div class="flex flex-col md:flex-row justify-center items-center gap-4 mt-8 mb-12">
+            <a href="{% url 'rdv:prise_rdv' %}" class="bg-gradient-to-r from-blue-400 to-green-400 text-white px-8 py-4 rounded-full text-lg font-semibold shadow hover:scale-105 transition duration-300">
+                Prendre rendez-vous
+            </a>
+            <a href="{% url 'accounts:login' %}" class="bg-white border border-blue-400 text-blue-600 px-8 py-4 rounded-full text-lg font-semibold shadow hover:bg-blue-50 transition duration-300">
+                Connexion
+            </a>
+            <a href="{% url 'accounts:register' %}" class="bg-gradient-to-r from-green-400 to-blue-400 text-white px-8 py-4 rounded-full text-lg font-semibold shadow hover:scale-105 transition duration-300">
+                Inscription
+            </a>
+        </div>
+
+        <!-- Témoignages carousel -->
+        <div class="mt-16">
+            <h2 class="text-2xl font-bold text-purple-500 mb-6 flex items-center justify-center">
+                <svg class="w-7 h-7 mr-2 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.178c.969 0 1.371 1.24.588 1.81l-3.385 2.46a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.386-2.46a1 1 0 00-1.175 0l-3.386 2.46c-.784.57-1.838-.196-1.539-1.118l1.287-3.966a1 1 0 00-.364-1.118l-3.385-2.46c-.783-.57-.38-1.81.588-1.81h4.178a1 1 0 00.95-.69l1.286-3.967z"/></svg>
+                Témoignages
+            </h2>
+            <div class="flex overflow-x-auto gap-6 px-2 pb-4">
+                <div class="bg-blue-50 rounded-2xl p-6 shadow min-w-[280px] max-w-xs mx-auto">
+                    <div class="flex items-center mb-2">
+                        <span class="text-yellow-400 mr-2">★★★★★</span>
+                        <span class="text-gray-700 font-semibold">Pauline</span>
+                    </div>
+                    <p class="text-gray-600 italic">“Marie m’a aidée à retrouver confiance en moi. Les séances sont toujours bienveillantes et efficaces.”</p>
+                </div>
+                <div class="bg-green-50 rounded-2xl p-6 shadow min-w-[280px] max-w-xs mx-auto">
+                    <div class="flex items-center mb-2">
+                        <span class="text-yellow-400 mr-2">★★★★★</span>
+                        <span class="text-gray-700 font-semibold">Julien</span>
+                    </div>
+                    <p class="text-gray-600 italic">“Un vrai accompagnement sur-mesure, j’ai progressé sur la gestion du stress au travail.”</p>
+                </div>
+                <div class="bg-pink-50 rounded-2xl p-6 shadow min-w-[280px] max-w-xs mx-auto">
+                    <div class="flex items-center mb-2">
+                        <span class="text-yellow-400 mr-2">★★★★★</span>
+                        <span class="text-gray-700 font-semibold">Sophie</span>
+                    </div>
+                    <p class="text-gray-600 italic">“J’ai adoré l’approche douce et personnalisée, je recommande à 100%.”</p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

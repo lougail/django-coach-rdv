@@ -31,15 +31,52 @@
                     </svg>
                     Mes prochains rendez-vous
                 </h2>
-                <div class="text-gray-600">
-                    <p class="mb-4">Vous n'avez pas encore de rendez-vous programmés.</p>
-                    <a href="#" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                        </svg>
-                        Prendre un rendez-vous
-                    </a>
-                </div>
+
+                {% if seances_a_venir %}
+                    <div class="space-y-3">
+                        {% for seance in seances_a_venir %}
+                            <div class="border border-gray-200 rounded-md p-4 hover:shadow-md transition-shadow">
+                                <div class="flex justify-between items-start">
+                                    <div class="flex-1">
+                                        <p class="font-semibold text-gray-900">{{ seance.date|date:"l d F Y" }}</p>
+                                        <p class="text-gray-600">{{ seance.heure_début }} - {{ seance.heure_fin }}</p>
+                                        <p class="text-sm text-gray-500 mt-1">{{ seance.objet|truncatewords:10 }}</p>
+                                    </div>
+                                    <div class="flex flex-col items-end space-y-2">
+                                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">{{ seance.get_statut_display }}</span>
+                                        {% if seance.statut == 'reservee' %}
+                                            <div class="flex space-x-1">
+                                                <form method="post" action="{% url 'accounts:annuler_seance' seance.id %}" style="display: inline;">
+                                                    {% csrf_token %}
+                                                    <button type="submit" 
+                                                            onclick="return confirm('Êtes-vous sûr de vouloir annuler ce rendez-vous ?')"
+                                                            class="text-red-600 hover:text-red-800 text-xs px-2 py-1 bg-red-50 hover:bg-red-100 rounded border border-red-200 transition-colors">
+                                                        🗑️ Annuler
+                                                    </button>
+                                                </form>
+                                                
+                                                {% comment %} <a href="{% url 'rdv:modifier_rdv' seance.id %}" 
+                                                   class="text-blue-600 hover:text-blue-800 text-xs px-2 py-1 bg-blue-50 hover:bg-blue-100 rounded border border-blue-200 transition-colors">
+                                                    ✏️ Modifier
+                                                </a> {% endcomment %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="text-gray-600">
+                        <p class="mb-4">Vous n'avez pas encore de rendez-vous programmés.</p>
+                        <a href="{% url 'rdv:prise_rdv' %}" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                            </svg>
+                            Prendre un rendez-vous
+                        </a>
+                    </div>
+                {% endif %}
             </div>
 
             <!-- Historique -->
@@ -50,9 +87,27 @@
                     </svg>
                     Historique des séances
                 </h2>
-                <div class="text-gray-600">
-                    <p>Aucune séance terminée pour le moment.</p>
-                </div>
+
+                {% if seances_passees %}
+                    <div class="space-y-3">
+                        {% for seance in seances_passees %}
+                            <div class="border border-gray-200 rounded-md p-4 bg-gray-50">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <p class="font-semibold text-gray-900">{{ seance.date|date:"l d F Y" }}</p>
+                                        <p class="text-gray-600">{{ seance.heure_début }} - {{ seance.heure_fin }}</p>
+                                        <p class="text-sm text-gray-500 mt-1">{{ seance.objet|truncatewords:10 }}</p>
+                                    </div>
+                                    <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Terminée</span>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="text-gray-600">
+                        <p>Aucune séance terminée pour le moment.</p>
+                    </div>
+                {% endif %}
             </div>
         </div>
 
@@ -62,7 +117,7 @@
             <div class="bg-white rounded-lg shadow-md p-6">
                 <h3 class="text-lg font-semibold text-gray-900 mb-4">Actions rapides</h3>
                 <div class="space-y-3">
-                    <a href="#" class="block w-full text-left px-4 py-3 bg-blue-50 text-blue-700 rounded-md hover:bg-blue-100 transition-colors">
+                    <a href="{% url 'rdv:prise_rdv' %}" class="block w-full text-left px-4 py-3 bg-blue-50 text-blue-700 rounded-md hover:bg-blue-100 transition-colors">
                         <div class="flex items-center">
                             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
@@ -78,14 +133,6 @@
                             Mon profil
                         </div>
                     </a>
-                    <a href="#" class="block w-full text-left px-4 py-3 bg-gray-50 text-gray-700 rounded-md hover:bg-gray-100 transition-colors">
-                        <div class="flex items-center">
-                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
-                            </svg>
-                            Mes paiements
-                        </div>
-                    </a>
                 </div>
             </div>
 
@@ -95,11 +142,11 @@
                 <div class="space-y-4">
                     <div class="flex justify-between items-center">
                         <span class="text-gray-600">Séances effectuées</span>
-                        <span class="font-semibold text-gray-900">0</span>
+                        <span class="font-semibold text-gray-900">{{ seances_passees|length }}</span>
                     </div>
                     <div class="flex justify-between items-center">
                         <span class="text-gray-600">Rendez-vous à venir</span>
-                        <span class="font-semibold text-gray-900">0</span>
+                        <span class="font-semibold text-gray-900">{{ seances_a_venir|length }}</span>
                     </div>
                     <div class="flex justify-between items-center">
                         <span class="text-gray-600">Membre depuis</span>
