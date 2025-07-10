@@ -1,0 +1,245 @@
+{% extends 'rdv/base.html' %}
+
+{% block title %}Prise de rendez-vous - Coach RDV{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-4 py-8">
+  <div class="flex flex-col md:flex-row rdv-cols md:space-x-0">
+    <!-- Colonne formulaire -->
+    <div class="md:w-1/2 w-full mb-8 md:mb-0">
+      <h1 class="text-3xl font-bold mb-6">Prendre un rendez-vous</h1>
+      <form method="post" class="bg-white rounded-lg shadow-md p-6">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <!-- 1. Date -->
+        <div class="mb-4">
+          <div class="flex items-center">
+            <label for="{{ form.date.id_for_label }}" class="w-32 text-sm font-medium text-gray-700 mr-4">
+              {{ form.date.label }}
+            </label>
+            <div class="flex-1">
+              {{ form.date }}
+              {% if form.date.errors %}
+                <div class="text-red-600 text-sm mt-1">{{ form.date.errors }}</div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <!-- 2. Heure de début -->
+        <div class="mb-4">
+          <div class="flex items-center">
+            <label for="{{ form.heure_début.id_for_label }}" class="w-32 text-sm font-medium text-gray-700 mr-4">
+              {{ form.heure_début.label }}
+            </label>
+            <div class="flex-1">
+              {{ form.heure_début }}
+              {% if form.heure_début.errors %}
+                <div class="text-red-600 text-sm mt-1">{{ form.heure_début.errors }}</div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <!-- 3. Objet -->
+        <div class="mb-4">
+          <div class="flex items-start">
+            <label for="{{ form.objet.id_for_label }}" class="w-32 text-sm font-medium text-gray-700 pt-2 mr-4">
+              {{ form.objet.label }}
+            </label>
+            <div class="flex-1">
+              {{ form.objet }}
+              {% if form.objet.errors %}
+                <div class="text-red-600 text-sm mt-1">{{ form.objet.errors }}</div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors duration-200">
+          Réserver
+        </button>
+      </form>
+    </div>
+    <!-- Colonne calendrier -->
+    <div class="md:w-1/2 w-full">
+      <h2 class="text-xl font-semibold mb-4">Créneaux disponibles</h2>
+      <div id="calendar" class="bg-white rounded-lg shadow-md p-2"></div>
+    </div>
+  </div>
+</div>
+
+<!-- FullCalendar CDN -->
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+
+<style>
+  /* Harmonisation FullCalendar + Tailwind pastel */
+  #calendar .fc {
+    font-family: 'Inter', 'Roboto', 'Arial', sans-serif;
+    background: transparent;
+  }
+  #calendar .fc-toolbar-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #2563eb;
+    letter-spacing: 0.01em;
+    text-shadow: 0 2px 8px #e0e7ff;
+  }
+  #calendar .fc-button {
+    background: #e0e7ff;
+    color: #2563eb;
+    border: none;
+    border-radius: 0.375rem;
+    padding: 0.25rem 0.75rem;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 1px 2px 0 rgb(59 130 246 / 0.08);
+    margin: 0 0.1rem;
+  }
+  #calendar .fc-button:hover, #calendar .fc-button.fc-button-active {
+    background: #2563eb;
+    color: #fff;
+  }
+  #calendar .fc-col-header-cell {
+    background: #e0e7ff;
+    color: #2563eb;
+    font-weight: 700;
+    border-right: 2px solid #c7d2fe;
+    font-size: 1.1rem;
+    letter-spacing: 0.01em;
+  }
+  #calendar .fc-scrollgrid-section-header {
+    border-radius: 0.5rem 0.5rem 0 0;
+    overflow: hidden;
+  }
+  #calendar .fc-timegrid-col {
+    background: #f8fafc;
+    border-right: 2px solid #e0e7ff;
+    transition: background 0.2s;
+  }
+  #calendar .fc-timegrid-col.fc-day-today {
+    background: #e0f2fe !important;
+    border-right: 2px solid #38bdf8;
+  }
+  #calendar .fc-timegrid-slot {
+    background: #f1f5f9;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  #calendar .fc-event {
+    box-shadow: 0 2px 8px 0 rgb(16 185 129 / 0.10);
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    padding: 0.1rem 0.2rem;
+    margin: 0.1rem 0.2rem;
+    cursor: pointer !important;
+  }
+  #calendar .fc-event:hover {
+    filter: brightness(0.97) drop-shadow(0 2px 8px #bae6fd);
+    opacity: 0.95;
+    transform: scale(1.03);
+    z-index: 2;
+  }
+  #calendar .fc-event.bg-green-100 {
+    background: linear-gradient(90deg, #bbf7d0 0%, #a7f3d0 100%) !important;
+    color: #166534 !important;
+  }
+  #calendar .fc-event.bg-red-100 {
+    background: linear-gradient(90deg, #fecaca 0%, #fca5a5 100%) !important;
+    color: #991b1b !important;
+  }
+  #calendar .fc-toolbar {
+    margin-bottom: 1.5rem;
+  }
+  #calendar .fc-daygrid-day-number, #calendar .fc-timegrid-axis {
+    color: #64748b;
+    font-weight: 500;
+  }
+  #calendar .fc-daygrid-day.fc-day-today {
+    background: #e0f2fe !important;
+  }
+  #calendar .fc-day-today {
+    background: #f0fdf4 !important;
+  }
+
+  /* Séparation nette entre les colonnes */
+  @media (min-width: 768px) {
+    .rdv-cols {
+      gap: 0;
+    }
+    .rdv-cols > div:first-child {
+      border-right: 2px solid #e0e7ff;
+      padding-right: 2rem;
+    }
+    .rdv-cols > div:last-child {
+      padding-left: 2rem;
+    }
+  }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var calendarEl = document.getElementById('calendar');
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'timeGridWeek',
+    locale: 'fr',
+    height: 650,
+    firstDay: 1, // Commence la semaine le lundi
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'timeGridWeek,timeGridDay,listWeek'
+    },
+    slotMinTime: '08:00:00',
+    slotMaxTime: '19:00:00',
+    allDaySlot: false,
+    nowIndicator: true,
+    events: '/api/creneaux/',
+    eventClick: function(info) {
+      if(info.event.title === 'Disponible') {
+        // Pré-remplir le formulaire avec la date et l'heure du créneau
+        const start = info.event.start;
+        const dateStr = start.toISOString().slice(0,10);
+        const heureStr = start.toTimeString().slice(0,5);
+        document.querySelector('input[name="date"]').value = dateStr;
+        let heureField = document.querySelector('select[name="heure_début"]');
+        if(heureField) {
+          for(let opt of heureField.options) {
+            if(opt.value === heureStr) { opt.selected = true; break; }
+          }
+        }
+        // Scroll to form
+        document.querySelector('form').scrollIntoView({behavior: 'smooth'});
+      }
+    },
+    eventDidMount: function(info) {
+      // Ajout de classes Tailwind pour le style pastel
+      if(info.event.title === 'Disponible') {
+        info.el.classList.add('bg-green-100','text-green-800','border','border-green-200','rounded');
+      } else {
+        info.el.classList.add('bg-red-100','text-red-800','border','border-red-200','rounded');
+      }
+    },
+    eventMouseEnter: function(info) {
+      if(info.event.title === 'Disponible') {
+        let tooltip = document.createElement('div');
+        tooltip.className = 'fc-tooltip bg-blue-600 text-white text-xs rounded px-2 py-1 shadow-lg absolute z-50';
+        tooltip.innerText = 'Cliquer pour réserver';
+        document.body.appendChild(tooltip);
+        info.el._fcTooltip = tooltip;
+        info.el.addEventListener('mousemove', function(e) {
+          tooltip.style.left = (e.pageX + 12) + 'px';
+          tooltip.style.top = (e.pageY - 12) + 'px';
+        });
+      }
+    },
+    eventMouseLeave: function(info) {
+      if(info.el._fcTooltip) {
+        info.el._fcTooltip.remove();
+        info.el._fcTooltip = null;
+      }
+    },
+  });
+  calendar.render();
+});
+</script>
+
+{% endblock %}
